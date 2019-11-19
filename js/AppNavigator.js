@@ -8,9 +8,18 @@ import TeamsScreen from './screens/Teams';
 const Stack = createStackNavigator(
   {
     Home: { screen: HomeScreen, navigationOptions: { header: null } },
-    Players: PlayersScreen,
-    Platform: PlatformScreen,
-    Teams: TeamsScreen,
+    Players: {
+      screen: PlayersScreen,
+      navigationOptions: { headerTitle: 'Players' },
+    },
+    Platform: {
+      screen: PlatformScreen,
+      navigationOptions: { headerTitle: 'Platform' },
+    },
+    Teams: {
+      screen: TeamsScreen,
+      navigationOptions: { headerTitle: 'Teams' },
+    },
   },
   {
     initialRouteName: 'Home',

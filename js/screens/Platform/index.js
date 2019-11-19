@@ -1,6 +1,17 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Platform, Text, View } from 'react-native';
 
-const Platform = () => <Text>Platform</Text>;
+const PlatformScreen = () => (
+  <View
+    style={{
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+    }}>
+    <Text style={{ fontSize: 24, fontWeight: 'bold' }}>
+      {Platform.OS.toUpperCase()}
+    </Text>
+  </View>
+);
 
-export default Platform;
+export default PlatformScreen;

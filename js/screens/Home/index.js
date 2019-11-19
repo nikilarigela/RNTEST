@@ -1,13 +1,36 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Text, View } from 'react-native';
+import { useSelector } from 'react-redux';
+import { Button } from '../../components';
+import { getColor } from '../../utils';
 
 const Home = props => {
-  useEffect(() => {
-    setTimeout(() => props.navigation.navigate('Players'), 2000);
-  }, [props.navigation]);
+  const navigateTo = screenName => {
+    props.navigation.navigate(screenName);
+  };
+  const countries = useSelector(state => state.countriesReducer);
+  const { data, selectedCountryId } = countries;
+  const selectedCountry = data.find(item => item.Id === selectedCountryId);
+
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home</Text>
+    <View
+      style={{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: getColor(data, selectedCountryId, 'Id'),
+      }}>
+      <Button label="Teams" onPress={() => navigateTo('Teams')} />
+      <Button label="Players" onPress={() => navigateTo('Players')} />
+      <Button label="Platform" onPress={() => navigateTo('Platform')} />
+
+      {selectedCountry ? (
+        <View style={{ backgroundColor: 'white' }}>
+          <Text>{`Name:${selectedCountry.name} \nContinent:${
+            selectedCountry.continent
+          } \nPopulation:${selectedCountry.population}`}</Text>
+        </View>
+      ) : null}
     </View>
   );
 };

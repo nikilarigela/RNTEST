@@ -1,12 +1,22 @@
-import { TEST_ACTION } from '../constants/actions';
+import { ADD_COUNTRIES, SELECT_COUNTRY } from '../constants/actions';
 
-const initialState = {};
+const initialState = { data: [], selectedCountryId: '' };
 
-const reducer = (state = initialState, action) => {
+const countriesReducer = (state = initialState, action) => {
   switch (action.type) {
-    case TEST_ACTION: {
+    case ADD_COUNTRIES: {
       return {
         ...state,
+        data: action.payload,
+        selectedCountryId: state.selectedCountryId
+          ? state.selectedCountryId
+          : action.payload[0].Id,
+      };
+    }
+    case SELECT_COUNTRY: {
+      return {
+        ...state,
+        selectedCountryId: action.payload,
       };
     }
 
@@ -15,4 +25,4 @@ const reducer = (state = initialState, action) => {
   }
 };
 
-export default reducer;
+export default countriesReducer;
