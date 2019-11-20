@@ -4,6 +4,9 @@ import HomeScreen from './screens/Home';
 import PlatformScreen from './screens/Platform';
 import PlayersScreen from './screens/Players';
 import TeamsScreen from './screens/Teams';
+import { setDefaultFont } from './utils';
+
+setDefaultFont();
 
 const Stack = createStackNavigator(
   {
