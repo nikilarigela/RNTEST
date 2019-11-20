@@ -1,6 +1,6 @@
 import { Picker } from '@react-native-community/picker';
 import React, { useEffect } from 'react';
-import { Image, View } from 'react-native';
+import { Image, Text, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { ADD_COUNTRIES, SELECT_COUNTRY } from '../../constants/actions';
 import { getColor, Images } from '../../utils';
@@ -19,22 +19,31 @@ const Teams = () => {
     fetchData();
   }, [dispatch]);
 
+  const { data, selectedCountryId } = countries;
+  const selectedCountry = data.find(item => item.Id === selectedCountryId);
+
   return (
     <View
       style={{
         flex: 1,
         alignItems: 'center',
-        backgroundColor: getColor(
-          countries.data,
-          countries.selectedCountryId,
-          'Id',
-        ),
+        backgroundColor: getColor(data, selectedCountryId, 'Id'),
       }}>
-      {countries.selectedCountryId ? (
+      {selectedCountryId ? (
         <Image
-          style={{ height: 50, width: 100, marginVertical: 16 }}
-          source={Images[countries.selectedCountryId]}
+          style={{ height: 70, width: 100, marginVertical: 16 }}
+          resizeMethod="auto"
+          resizeMode="contain"
+          source={Images[selectedCountryId] || Images[0]}
         />
+      ) : null}
+      {selectedCountry && selectedCountryId ? (
+        <View
+          style={{ backgroundColor: 'white', padding: 16, marginVertical: 16 }}>
+          <Text>{`Name:${selectedCountry.name} \nContinent:${
+            selectedCountry.continent
+          } \nPopulation:${selectedCountry.population}`}</Text>
+        </View>
       ) : null}
       <View
         style={{
@@ -45,12 +54,12 @@ const Teams = () => {
         }}>
         <Picker
           styl={{ flex: 1 }}
-          selectedValue={countries.selectedCountryId}
+          selectedValue={selectedCountryId}
           itemStyle={{ backgroundColor: 'white' }}
           onValueChange={itemValue =>
             dispatch({ type: SELECT_COUNTRY, payload: itemValue })
           }>
-          {countries.data.map(item => (
+          {data.map(item => (
             <Picker.Item key={item.Id} label={item.name} value={item.Id} />
           ))}
         </Picker>
