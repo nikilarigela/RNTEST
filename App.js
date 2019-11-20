@@ -7,7 +7,6 @@
  */
 
 import React from 'react';
-import { SafeAreaView } from 'react-native';
 import { useScreens } from 'react-native-screens';
 import { Provider } from 'react-redux';
 import AppNavigator from './js/AppNavigator';
@@ -18,9 +17,7 @@ useScreens();
 const App = () => {
   return (
     <Provider store={store}>
-      <SafeAreaView style={{ flex: 1 }}>
-        <AppNavigator />
-      </SafeAreaView>
+      <AppNavigator />
     </Provider>
   );
 };

@@ -10,7 +10,10 @@ setDefaultFont();
 
 const Stack = createStackNavigator(
   {
-    Home: { screen: HomeScreen, navigationOptions: { header: null } },
+    Home: {
+      screen: HomeScreen,
+      navigationOptions: { headerTitle: 'Home' },
+    },
     Players: {
       screen: PlayersScreen,
       navigationOptions: { headerTitle: 'Players' },

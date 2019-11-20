@@ -24,11 +24,9 @@ const Home = props => {
       <Button label="Players" onPress={() => navigateTo('Players')} />
       <Button label="Platform" onPress={() => navigateTo('Platform')} />
 
-      {selectedCountry ? (
+      {selectedCountry && selectedCountryId ? (
         <View style={{ backgroundColor: 'white' }}>
-          <Text>{`Name:${selectedCountry.name} \nContinent:${
-            selectedCountry.continent
-          } \nPopulation:${selectedCountry.population}`}</Text>
+          <Text>{`Name:${selectedCountry.name} \nContinent:${selectedCountry.continent} \nPopulation:${selectedCountry.population}`}</Text>
         </View>
       ) : null}
     </View>

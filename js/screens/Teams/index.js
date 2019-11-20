@@ -24,34 +24,37 @@ const Teams = () => {
       style={{
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center',
         backgroundColor: getColor(
           countries.data,
           countries.selectedCountryId,
           'Id',
         ),
       }}>
-      <Picker
-        selectedValue={countries.selectedCountryId}
+      {countries.selectedCountryId ? (
+        <Image
+          style={{ height: 50, width: 100, marginVertical: 16 }}
+          source={Images[countries.selectedCountryId]}
+        />
+      ) : null}
+      <View
         style={{
           height: 50,
           width: '80%',
           backgroundColor: 'white',
           marginBottom: 16,
-        }}
-        onValueChange={itemValue =>
-          dispatch({ type: SELECT_COUNTRY, payload: itemValue })
-        }>
-        {countries.data.map(item => (
-          <Picker.Item key={item.Id} label={item.name} value={item.Id} />
-        ))}
-      </Picker>
-      {countries.selectedCountryId ? (
-        <Image
-          style={{ height: 50, width: 100 }}
-          source={Images[countries.selectedCountryId]}
-        />
-      ) : null}
+        }}>
+        <Picker
+          styl={{ flex: 1 }}
+          selectedValue={countries.selectedCountryId}
+          itemStyle={{ backgroundColor: 'white' }}
+          onValueChange={itemValue =>
+            dispatch({ type: SELECT_COUNTRY, payload: itemValue })
+          }>
+          {countries.data.map(item => (
+            <Picker.Item key={item.Id} label={item.name} value={item.Id} />
+          ))}
+        </Picker>
+      </View>
     </View>
   );
 };

@@ -7,10 +7,7 @@ const countriesReducer = (state = initialState, action) => {
     case ADD_COUNTRIES: {
       return {
         ...state,
-        data: action.payload,
-        selectedCountryId: state.selectedCountryId
-          ? state.selectedCountryId
-          : action.payload[0].Id,
+        data: [{ Id: '', name: 'Select' }, ...action.payload],
       };
     }
     case SELECT_COUNTRY: {
